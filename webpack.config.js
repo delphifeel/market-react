@@ -5,7 +5,7 @@ module.exports = {
     },
     resolve: {
         modulesDirectories: [
-            "app",
+            "app/scripts",
             "node_modules"
         ]
     },

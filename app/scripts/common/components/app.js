@@ -1,4 +1,3 @@
-require("styles/main.css");
 var React = require("react");
 var Header = require("./header");
 var Body = require("./body");

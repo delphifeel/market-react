@@ -1,5 +1,5 @@
 var React = require("react");
-var bucketStore = require("scripts/common/stores/bucketStore");
+var bucketStore = require("common/stores/bucketStore");
 var _ = require("underscore");
 
 function getSummary(items) {

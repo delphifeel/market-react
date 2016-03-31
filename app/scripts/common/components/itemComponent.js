@@ -1,8 +1,8 @@
 var React = require("react");
-var bucketStore = require("scripts/common/stores/bucketStore");
-var bucketActions = require("scripts/common/actions/bucketActions");
-var itemsActions = require("scripts/common/actions/itemsActions");
-var itemsStore = require("scripts/common/stores/itemsStore");
+var bucketStore = require("common/stores/bucketStore");
+var bucketActions = require("common/actions/bucketActions");
+var itemsActions = require("common/actions/itemsActions");
+var itemsStore = require("common/stores/itemsStore");
 
 var ItemComponent = React.createClass({
     isHaveItems: function () {

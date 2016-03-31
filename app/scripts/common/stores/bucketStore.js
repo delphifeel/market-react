@@ -1,5 +1,5 @@
 var createStore = require("redux").createStore;
-var bucketActionsTypes = require("scripts/common/constants/bucketActionsTypes");
+var bucketActionsTypes = require("common/constants/bucketActionsTypes");
 var _ = require("underscore");
 
 var initialState = [

@@ -1,5 +1,5 @@
 var createStore = require("redux").createStore;
-var itemsActionsTypes = require("scripts/common/constants/itemsActionsTypes");
+var itemsActionsTypes = require("common/constants/itemsActionsTypes");
 var _ = require("underscore");
 var applyMiddleware = require("redux").applyMiddleware;
 var reduxThunk = require("redux-thunk");

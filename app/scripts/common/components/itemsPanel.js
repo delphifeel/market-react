@@ -1,6 +1,6 @@
 var React = require("react");
-var itemsStore = require("scripts/common/stores/itemsStore");
-var itemsActions = require("scripts/common/actions/itemsActions");
+var itemsStore = require("common/stores/itemsStore");
+var itemsActions = require("common/actions/itemsActions");
 var ItemComponent = require("./itemComponent");
 
 var ItemsPanel = React.createClass({

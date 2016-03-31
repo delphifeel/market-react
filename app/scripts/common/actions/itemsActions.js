@@ -1,6 +1,6 @@
-var itemsActionsTypes = require("scripts/common/constants/itemsActionsTypes");
+var itemsActionsTypes = require("common/constants/itemsActionsTypes");
 var $ = require("jquery");
-var itemsService = require("scripts/common/services/itemsService");
+var itemsService = require("common/services/itemsService");
 
 module.exports = {
     addItem: function (item) {

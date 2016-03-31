@@ -1,4 +1,4 @@
-var bucketActionsTypes = require("scripts/common/constants/bucketActionsTypes");
+var bucketActionsTypes = require("common/constants/bucketActionsTypes");
 
 module.exports = {
     addItem: function (item) {
