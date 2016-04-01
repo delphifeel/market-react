@@ -1,29 +1,18 @@
 var React = require("react");
-var itemsStore = require("common/stores/itemsStore");
+var connect = require("react-redux").connect;
 var itemsActions = require("common/actions/itemsActions");
+var bucketActions = require("common/actions/bucketActions");
 var ItemComponent = require("./itemComponent");
 
 var ItemsPanel = React.createClass({
-    getInitialState: function () {
-        return {
-            items: itemsStore.getState()
-        };
-    },
-
-    onChange: function () {
-        var items = itemsStore.getState();
-        this.setState({
-            items: items
-        });
+    propTypes: {
+        items: React.PropTypes.array.isRequired,
+        onItemClick: React.PropTypes.func.isRequired,
+        loadItems: React.PropTypes.func.isRequired
     },
 
     componentDidMount: function () {
-        this.unsubscribe = itemsStore.subscribe(this.onChange);
-        itemsStore.dispatch(itemsActions.loadItems());
-    },
-
-    componentWillUnmount: function () {
-        this.unsubscribe();
+        this.props.loadItems();
     },
 
     createItemComponent: function (item) {
@@ -32,12 +21,12 @@ var ItemsPanel = React.createClass({
         }
 
         return (
-            <ItemComponent key={item.id} item={item} />
+            <ItemComponent key={item.id} item={item} onItemClick={this.props.onItemClick.bind(null, item)} />
         );
     },
 
     getItems: function () {
-        return this.state.items.map(this.createItemComponent);
+        return this.props.items.map(this.createItemComponent);
     },
 
     render: function () {
@@ -48,5 +37,38 @@ var ItemsPanel = React.createClass({
         );
     }
 });
+
+var mapStateToProps = function (state) {
+    return {
+        items: state.items
+    }
+};
+
+var onItemClick = function (dispatch, item) {
+    if (item.quantity > 0) {
+
+        dispatch(bucketActions.addItem(
+            item
+        ));
+
+        dispatch(itemsActions.changeItemQuantity(
+            item.id,
+            item.quantity - 1
+        ));
+    }
+};
+
+var loadItems = function (dispatch) {
+    dispatch(itemsActions.loadItems());
+};
+
+var mapDispatchToProps = function (dispatch) {
+    return {
+        onItemClick: onItemClick.bind(this, dispatch),
+        loadItems: loadItems.bind(this, dispatch)
+    }
+};
+
+ItemsPanel = connect(mapStateToProps, mapDispatchToProps)(ItemsPanel);
 
 module.exports = ItemsPanel;

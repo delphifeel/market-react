@@ -1,10 +1,5 @@
-var createStore = require("redux").createStore;
 var bucketActionsTypes = require("common/constants/bucketActionsTypes");
 var _ = require("underscore");
-
-var initialState = [
-
-];
 
 function addToBucket (bucketItems, item) {
     var bucketItem, alreadyItem, newBucketItems,
@@ -24,6 +19,10 @@ function addToBucket (bucketItems, item) {
 }
 
 function bucketReducer(bucketItems, action) {
+    if (bucketItems === undefined) {
+        bucketItems = [];
+    }
+
     switch (action.type) {
         case bucketActionsTypes.ADD_ITEM:
             return addToBucket(bucketItems, action.item);
@@ -33,6 +32,4 @@ function bucketReducer(bucketItems, action) {
     }
 }
 
-var bucketStore = createStore(bucketReducer, initialState);
-
-module.exports = bucketStore;
+module.exports = bucketReducer;

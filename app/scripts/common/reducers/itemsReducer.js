@@ -1,8 +1,5 @@
-var createStore = require("redux").createStore;
 var itemsActionsTypes = require("common/constants/itemsActionsTypes");
 var _ = require("underscore");
-var applyMiddleware = require("redux").applyMiddleware;
-var reduxThunk = require("redux-thunk");
 
 var initialState = [];
 
@@ -21,6 +18,10 @@ function changeItemQuantity(items, itemId, newQuantity) {
 }
 
 function itemsReducer(items, action) {
+    if (items === undefined) {
+        items = [];
+    }
+
     switch (action.type) {
         case itemsActionsTypes.ADD_ITEM:
             return addToItems(items, action.item);
@@ -36,6 +37,4 @@ function itemsReducer(items, action) {
     }
 }
 
-var itemsStore = createStore(itemsReducer, initialState, applyMiddleware(reduxThunk.default));
-
-module.exports = itemsStore;
+module.exports = itemsReducer;

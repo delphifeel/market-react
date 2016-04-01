@@ -1,6 +1,6 @@
 var React = require("react");
-var bucketStore = require("common/stores/bucketStore");
 var _ = require("underscore");
+var connect = require("react-redux").connect;
 
 function getSummary(items) {
     var result = 0;
@@ -11,17 +11,8 @@ function getSummary(items) {
 }
 
 var Bucket = React.createClass({
-    getInitialState: function () {
-        return {
-            items: bucketStore.getState()
-        };
-    },
-
-    onChange: function () {
-        var items = bucketStore.getState();
-        this.setState({
-            items: items
-        });
+    propTypes: {
+        items: React.PropTypes.array.isRequired
     },
 
     createBucketItem: function (item) {
@@ -31,26 +22,18 @@ var Bucket = React.createClass({
     },
 
     getBucketItems: function () {
-        if (this.state.items.length === 0) {
+        if (this.props.items.length === 0) {
             return <div>No items in bucket :(</div>
         } else {
-            return this.state.items.map(this.createBucketItem);
+            return this.props.items.map(this.createBucketItem);
         }
-    },
-
-    componentDidMount: function () {
-        this.unsubscribe = bucketStore.subscribe(this.onChange);
-    },
-
-    componentWillUnmount: function () {
-        this.unsubscribe();
     },
 
     getSummaryPrice: function () {
-        if (this.state.items.length <= 0) {
+        if (this.props.items.length <= 0) {
             return;
         }
-        return <div>Summary: {getSummary(this.state.items)}</div>
+        return <div>Summary: {getSummary(this.props.items)}</div>
     },
 
     render: function () {
@@ -62,5 +45,13 @@ var Bucket = React.createClass({
         );
     }
 });
+
+var mapStateToProps = function (state) {
+    return {
+        items: state.bucket
+    };
+};
+
+Bucket = connect(mapStateToProps)(Bucket);
 
 module.exports = Bucket;

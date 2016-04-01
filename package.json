@@ -4,15 +4,16 @@
   "description": "",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --hot --inline",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "jquery": "*",
     "react": "^0.14.5",
     "react-dom": "^0.14.5",
+    "react-redux": "^4.4.1",
     "redux": "*",
     "redux-thunk": "*",
-    "jquery": "*",
     "underscore": "*"
   },
   "devDependencies": {

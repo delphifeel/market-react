@@ -14,7 +14,7 @@ module.exports = {
         contentBase: "./public",
         colors: true,
         historyApiFallback: true,
-        inline: true
+        //inline: true
     },
     module: {
         loaders: [
