@@ -9,12 +9,12 @@ module.exports = {
             "node_modules"
         ]
     },
-    devtool: 'eval-source-map',
+    devtool: 'source-map',
     devServer: {
         contentBase: "./public",
         colors: true,
         historyApiFallback: true,
-        //inline: true
+        inline: true
     },
     module: {
         loaders: [

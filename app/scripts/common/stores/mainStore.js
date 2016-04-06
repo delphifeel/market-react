@@ -3,6 +3,7 @@
  */
 var bucketReducer = require("common/reducers/bucketReducer");
 var itemsReducer = require("common/reducers/itemsReducer");
+var activeFormReducer = require("common/reducers/activeFormReducer");
 var combineReducers = require("redux").combineReducers;
 var applyMiddleware = require("redux").applyMiddleware;
 var reduxThunk = require("redux-thunk");
@@ -15,7 +16,8 @@ var initialState = {
 
 var mainReducer = combineReducers({
     bucket: bucketReducer,
-    items: itemsReducer
+    items: itemsReducer,
+    activeForm: activeFormReducer
 });
 
 var mainStore = createStore(

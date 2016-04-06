@@ -3,6 +3,7 @@ var connect = require("react-redux").connect;
 var itemsActions = require("common/actions/itemsActions");
 var bucketActions = require("common/actions/bucketActions");
 var ItemComponent = require("./itemComponent");
+var createSelector = require("reselect").createSelector;
 
 var ItemsPanel = React.createClass({
     propTypes: {
@@ -16,10 +17,6 @@ var ItemsPanel = React.createClass({
     },
 
     createItemComponent: function (item) {
-        if (item.quantity <= 0) {
-            return;
-        }
-
         return (
             <ItemComponent key={item.id} item={item} onItemClick={this.props.onItemClick.bind(null, item)} />
         );
@@ -31,16 +28,29 @@ var ItemsPanel = React.createClass({
 
     render: function () {
         return (
-            <div>
+            <div className="body-panel black-border">
                 {this.getItems()}
             </div>
         );
     }
 });
 
+var getItems = function (state) {
+    return state.items;
+};
+
+var getExistingItems = createSelector(
+    [getItems],
+    function (items) {
+        return items.filter(function (item) {
+            return item.quantity > 0;
+        });
+    }
+);
+
 var mapStateToProps = function (state) {
     return {
-        items: state.items
+        items: getExistingItems(state)
     }
 };
 
