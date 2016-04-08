@@ -4,7 +4,15 @@ var _ = require("underscore");
 var initialState = [];
 
 function addToItems(items, item) {
-    // TODO
+    var newItems, newItem, id;
+
+    newItems = items.slice();
+    id = _.last(newItems).id + 1;
+    newItems.push(_.extend(item, {
+        id: id
+    }));
+
+    return newItems;
 }
 
 function changeItemQuantity(items, itemId, newQuantity) {

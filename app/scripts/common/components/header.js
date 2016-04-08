@@ -4,7 +4,7 @@ var Bucket = require("./bucket");
 var Header = React.createClass({
     render: function () {
         return (
-            <div className="header-panel black-border">
+            <div className="header-panel">
                 <Bucket />
             </div>
         );

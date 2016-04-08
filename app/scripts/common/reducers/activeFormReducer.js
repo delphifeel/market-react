@@ -10,6 +10,7 @@ function activeFormReducer(state, action) {
 
     switch (action.type) {
         case activeFormActionsTypes.OPEN_FORM:
+        case activeFormActionsTypes.CLOSE_ACTIVE_FORM:
             return action.formName;
         default:
             return state;

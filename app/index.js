@@ -3,7 +3,8 @@ var Provider = require("react-redux").Provider;
 var ReactDom = require("react-dom");
 var React = require("react");
 var mainStore = require("common/stores/mainStore");
-require("./styles/main.css");
+
+require("./styles/main.less");
 
 ReactDom.render(
     <Provider store={mainStore}>

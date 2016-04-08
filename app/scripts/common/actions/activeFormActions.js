@@ -9,5 +9,11 @@ module.exports = {
             type: activeFormActionsTypes.OPEN_FORM,
             formName: formName
         };
+    },
+    closeActiveForm: function () {
+        return {
+            type: activeFormActionsTypes.CLOSE_ACTIVE_FORM,
+            formName: null
+        }
     }
 };

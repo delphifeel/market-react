@@ -28,7 +28,7 @@ var ItemsPanel = React.createClass({
 
     render: function () {
         return (
-            <div className="body-panel black-border">
+            <div className="body-panel">
                 {this.getItems()}
             </div>
         );
@@ -74,8 +74,8 @@ var loadItems = function (dispatch) {
 
 var mapDispatchToProps = function (dispatch) {
     return {
-        onItemClick: onItemClick.bind(this, dispatch),
-        loadItems: loadItems.bind(this, dispatch)
+        onItemClick: onItemClick.bind(null, dispatch),
+        loadItems: loadItems.bind(null, dispatch)
     }
 };
 
