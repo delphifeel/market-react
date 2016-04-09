@@ -2,14 +2,19 @@ var React = require("react");
 var connect = require("react-redux").connect;
 var itemsActions = require("common/actions/itemsActions");
 var bucketActions = require("common/actions/bucketActions");
-var ItemComponent = require("./itemComponent");
+var ItemComponent = require("common/components/itemComponent");
 var createSelector = require("reselect").createSelector;
+var activeFormActions = require("common/actions/activeFormActions");
+var activeFormActionsTypes = require("common/constants/activeFormActionsTypes");
+var browserHistory = require("react-router").browserHistory;
 
 var ItemsPanel = React.createClass({
     propTypes: {
         items: React.PropTypes.array.isRequired,
-        onItemClick: React.PropTypes.func.isRequired,
-        loadItems: React.PropTypes.func.isRequired
+        onAddToBucket: React.PropTypes.func.isRequired,
+        onViewItem: React.PropTypes.func.isRequired,
+        loadItems: React.PropTypes.func.isRequired,
+        openCreateItemForm: React.PropTypes.func.isRequired
     },
 
     componentDidMount: function () {
@@ -18,7 +23,10 @@ var ItemsPanel = React.createClass({
 
     createItemComponent: function (item) {
         return (
-            <ItemComponent key={item.id} item={item} onItemClick={this.props.onItemClick.bind(null, item)} />
+            <ItemComponent key={item.id}
+                           item={item}
+                           onAddToBucket={this.props.onAddToBucket.bind(null, item)}
+                           onView={this.props.onViewItem.bind(null, item.id)}/>
         );
     },
 
@@ -28,8 +36,11 @@ var ItemsPanel = React.createClass({
 
     render: function () {
         return (
-            <div className="body-panel">
-                {this.getItems()}
+            <div>
+                <button onClick={this.props.openCreateItemForm}>Create new item</button>
+                <div className="body-panel">
+                    {this.getItems()}
+                </div>
             </div>
         );
     }
@@ -54,7 +65,7 @@ var mapStateToProps = function (state) {
     }
 };
 
-var onItemClick = function (dispatch, item) {
+var addToBucket = function (dispatch, item) {
     if (item.quantity > 0) {
 
         dispatch(bucketActions.addItem(
@@ -72,10 +83,19 @@ var loadItems = function (dispatch) {
     dispatch(itemsActions.loadItems());
 };
 
+var viewItem = function (itemId) {
+    browserHistory.push("/item/" + itemId);
+};
+
 var mapDispatchToProps = function (dispatch) {
     return {
-        onItemClick: onItemClick.bind(null, dispatch),
-        loadItems: loadItems.bind(null, dispatch)
+        onAddToBucket: addToBucket.bind(null, dispatch),
+        onViewItem: viewItem,
+        loadItems: loadItems.bind(null, dispatch),
+        openCreateItemForm: dispatch.bind(
+            null,
+            activeFormActions.openForm(activeFormActionsTypes.CREATE_ITEM_FORM_NAME)
+        )
     }
 };
 

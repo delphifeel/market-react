@@ -7,7 +7,7 @@ var Application = React.createClass({
         return (
             <div>
                 <Header />
-                <Body />
+                {this.props.children}
             </div>
         );
     }

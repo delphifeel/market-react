@@ -8,6 +8,7 @@ var combineReducers = require("redux").combineReducers;
 var applyMiddleware = require("redux").applyMiddleware;
 var reduxThunk = require("redux-thunk");
 var createStore = require("redux").createStore;
+var routerReducer = require("react-router-redux").routerReducer;
 
 var initialState = {
     items: [],
@@ -17,7 +18,8 @@ var initialState = {
 var mainReducer = combineReducers({
     bucket: bucketReducer,
     items: itemsReducer,
-    activeForm: activeFormReducer
+    activeForm: activeFormReducer,
+    routing: routerReducer
 });
 
 var mainStore = createStore(

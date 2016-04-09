@@ -11,7 +11,6 @@ var Body = React.createClass({
     render: function () {
         return (
             <div>
-                <button onClick={this.props.openCreateItemForm}>Create new item</button>
                 {this.props.isFormOpened ?
                     <CreateItemForm onCreate={this.props.onCreate} onBack={this.props.onBack} /> :
                     null
@@ -38,10 +37,6 @@ var onItemCreate = function (dispatch, item) {
 
 var mapDispatchToProps = function (dispatch) {
     return {
-        openCreateItemForm: dispatch.bind(
-            null,
-            activeFormActions.openForm(activeFormActionsTypes.CREATE_ITEM_FORM_NAME)
-        ),
         onCreate: onItemCreate.bind(null, dispatch),
         onBack: dispatch.bind(null, activeFormActions.closeActiveForm())
     }
