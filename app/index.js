@@ -8,6 +8,7 @@ var mainStore = require("common/stores/mainStore");
 var syncHistoryWithStore = require("react-router-redux").syncHistoryWithStore;
 var Router = require("react-router").Router;
 var Route = require("react-router").Route;
+var IndexRoute = require("react-router").IndexRoute;
 var browserHistory = require("react-router").browserHistory;
 
 require("./styles/main.less");
@@ -17,9 +18,9 @@ const history = syncHistoryWithStore(browserHistory, mainStore);
 ReactDom.render(
     <Provider store={mainStore}>
         <Router history={history}>
-            <Route component={Application}>
-                <Route path="/" component={Body} />
-                <Route path="/item/:itemId" component={ViewItem} />
+            <Route path="/" component={Application}>
+                <IndexRoute component={Body}/>
+                <Route path="item/:itemId" component={ViewItem} />
             </Route>
         </Router>
     </Provider>,

@@ -9,7 +9,7 @@ module.exports = {
             "node_modules"
         ]
     },
-    devtool: 'source-map',
+    devtool: 'eval',
     devServer: {
         contentBase: "./public",
         colors: true,

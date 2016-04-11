@@ -13,12 +13,7 @@ var ItemsPanel = React.createClass({
         items: React.PropTypes.array.isRequired,
         onAddToBucket: React.PropTypes.func.isRequired,
         onViewItem: React.PropTypes.func.isRequired,
-        loadItems: React.PropTypes.func.isRequired,
         openCreateItemForm: React.PropTypes.func.isRequired
-    },
-
-    componentDidMount: function () {
-        this.props.loadItems();
     },
 
     createItemComponent: function (item) {
@@ -79,10 +74,6 @@ var addToBucket = function (dispatch, item) {
     }
 };
 
-var loadItems = function (dispatch) {
-    dispatch(itemsActions.loadItems());
-};
-
 var viewItem = function (itemId) {
     browserHistory.push("/item/" + itemId);
 };
@@ -91,7 +82,6 @@ var mapDispatchToProps = function (dispatch) {
     return {
         onAddToBucket: addToBucket.bind(null, dispatch),
         onViewItem: viewItem,
-        loadItems: loadItems.bind(null, dispatch),
         openCreateItemForm: dispatch.bind(
             null,
             activeFormActions.openForm(activeFormActionsTypes.CREATE_ITEM_FORM_NAME)
