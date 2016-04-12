@@ -9,7 +9,7 @@ module.exports = {
     ],
     output: {
         path: path.resolve(__dirname, "public"),
-        publicPath: "/assets/",
+        publicPath: "/static/",
         filename: "browser-bundle.js"
     },
     resolve: {
@@ -19,6 +19,14 @@ module.exports = {
         ]
     },
     devtool: 'eval',
+    devServer: {
+        contentBase: path.resolve(__dirname, "public"),
+        publicPath: "/static/",
+        colors: true,
+        historyApiFallback: true,
+        inline: true,
+        hot: true
+    },
     plugins: [
         new webpack.HotModuleReplacementPlugin()
     ],
@@ -26,11 +34,8 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: "/node_modules/",
-                query: {
-                    presets: ['es2015', 'react']
-                }
+                loaders: ["react-hot", "babel"],
+                include: path.resolve(__dirname, "app")
             },
             {
                 test: /\.(le|c)ss$/,

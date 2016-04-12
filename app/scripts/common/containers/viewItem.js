@@ -12,7 +12,7 @@ var ViewItem = React.createClass({
     },
 
     goBack: function () {
-        browserHistory.push("/");
+        browserHistory.goBack();
     },
 
     render: function () {
@@ -21,6 +21,7 @@ var ViewItem = React.createClass({
                 <div>Id: {this.props.item.id}</div>
                 <div>Name: {this.props.item.name}</div>
                 <div>Price: {this.props.item.price}</div>
+                <div>Quantity: {this.props.item.quantity}</div>
 
                 <button onClick={this.goBack}>Go Back</button>
             </div>
