@@ -75,7 +75,7 @@ var addToBucket = function (dispatch, item) {
 };
 
 var viewItem = function (itemId) {
-    browserHistory.push("/item/" + itemId);
+    browserHistory.push("/item/" + itemId + "/view");
 };
 
 var mapDispatchToProps = function (dispatch) {

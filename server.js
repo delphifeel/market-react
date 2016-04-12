@@ -1,18 +1,20 @@
-/**
- * Created by Zeron on 10.04.2016.
- */
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
+var WebpackDevServer = require("webpack-dev-server");
+var webpack = require("webpack");
+var config = require("./webpack.config");
+var path = require("path");
 
-new WebpackDevServer(webpack(config), {
+var compiler = webpack(config);
+var server = new WebpackDevServer(compiler, {
+    contentBase: "./public",
     publicPath: config.output.publicPath,
-    hot: true,
-    historyApiFallback: true
-}).listen(3000, 'localhost', function (err, result) {
-        if (err) {
-            return console.log(err);
-        }
 
-        console.log('Listening at http://localhost:3000/');
-    });
+    hot: true,
+    historyApiFallback: {
+        index: "index.html"
+    },
+
+    // webpack-dev-middleware options
+    stats: { colors: true }
+});
+
+server.listen(8080, "localhost", function() {});

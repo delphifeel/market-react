@@ -5,7 +5,8 @@ var connect = require("react-redux").connect;
 var itemsActions = require("common/actions/itemsActions");
 
 var Application = React.createClass({
-    componentDidMount: function () {
+
+    componentWillMount: function () {
         this.props.loadItems();
     },
 

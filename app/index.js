@@ -20,7 +20,7 @@ ReactDom.render(
         <Router history={history}>
             <Route path="/" component={Application}>
                 <IndexRoute component={Body}/>
-                <Route path="item/:itemId" component={ViewItem} />
+                <Route path="/item/:itemId/view" component={ViewItem} />
             </Route>
         </Router>
     </Provider>,

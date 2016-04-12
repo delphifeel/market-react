@@ -29,7 +29,7 @@ var ViewItem = React.createClass({
 });
 
 var getItem = function (items, itemId) {
-    return _.findWhere(items, {id: parseInt(itemId)});
+    return _.findWhere(items, {id: parseInt(itemId)}) || {};
 };
 
 var mapStateToProps = function (state, ownProps) {

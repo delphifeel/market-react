@@ -1,7 +1,16 @@
+var path = require("path");
+var webpack = require("webpack");
+
 module.exports = {
-    entry: './app/index',
+    entry: [
+        "webpack-dev-server/client?http://localhost:8080",
+        "webpack/hot/only-dev-server",
+        './app/index'
+    ],
     output: {
-        filename: './public/browser-bundle.js'
+        path: path.resolve(__dirname, "public"),
+        publicPath: "/assets/",
+        filename: "browser-bundle.js"
     },
     resolve: {
         modulesDirectories: [
@@ -10,12 +19,9 @@ module.exports = {
         ]
     },
     devtool: 'eval',
-    devServer: {
-        contentBase: "./public",
-        colors: true,
-        historyApiFallback: true,
-        inline: true
-    },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ],
     module: {
         loaders: [
             {
