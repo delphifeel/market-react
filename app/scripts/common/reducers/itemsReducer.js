@@ -16,11 +16,13 @@ function addToItems(items, item) {
 }
 
 function changeItemQuantity(items, itemId, newQuantity) {
-    var newItems, item;
+    var newItems, item, newItemIndex, newItem;
 
     newItems = items.slice();
-    item = _.findWhere(newItems, {id: itemId});
-    item.quantity = newQuantity;
+    newItemIndex = _.findIndex(newItems, function (item) {return item.id === itemId;});
+    newItem = _.extend({}, newItems[newItemIndex]);
+    newItem.quantity = newQuantity;
+    newItems[newItemIndex] = newItem;
 
     return newItems;
 }
