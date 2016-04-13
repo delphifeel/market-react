@@ -2,26 +2,20 @@ var React = require("react");
 var connect = require("react-redux").connect;
 var itemsActions = require("common/actions/itemsActions");
 var bucketActions = require("common/actions/bucketActions");
-var ItemComponent = require("common/components/itemComponent");
+var ItemOnPanel = require("common/containers/itemOnPanel");
 var createSelector = require("reselect").createSelector;
 var activeFormActions = require("common/actions/activeFormActions");
 var activeFormActionsTypes = require("common/constants/activeFormActionsTypes");
-var browserHistory = require("react-router").browserHistory;
 
 var ItemsPanel = React.createClass({
     propTypes: {
         items: React.PropTypes.array.isRequired,
-        onAddToBucket: React.PropTypes.func.isRequired,
-        onViewItem: React.PropTypes.func.isRequired,
         openCreateItemForm: React.PropTypes.func.isRequired
     },
 
     createItemComponent: function (item) {
         return (
-            <ItemComponent key={item.id}
-                           item={item}
-                           onAddToBucket={this.props.onAddToBucket.bind(null, item)}
-                           onView={this.props.onViewItem.bind(null, item.id)}/>
+            <ItemOnPanel key={item.id} item={item}/>
         );
     },
 
@@ -60,28 +54,8 @@ var mapStateToProps = function (state) {
     }
 };
 
-var addToBucket = function (dispatch, item) {
-    if (item.quantity > 0) {
-
-        dispatch(bucketActions.addItem(
-            item
-        ));
-
-        dispatch(itemsActions.changeItemQuantity(
-            item.id,
-            item.quantity - 1
-        ));
-    }
-};
-
-var viewItem = function (itemId) {
-    browserHistory.push("/item/" + itemId + "/view");
-};
-
 var mapDispatchToProps = function (dispatch) {
     return {
-        onAddToBucket: addToBucket.bind(null, dispatch),
-        onViewItem: viewItem,
         openCreateItemForm: dispatch.bind(
             null,
             activeFormActions.openForm(activeFormActionsTypes.CREATE_ITEM_FORM_NAME)

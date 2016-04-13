@@ -4,11 +4,13 @@
 var React = require("react");
 var connect = require("react-redux").connect;
 var _ = require("underscore");
+var ItemComponent = require("common/components/itemComponent");
 var browserHistory = require("react-router").browserHistory;
 
 var ViewItem = React.createClass({
     propTypes: {
-        params: React.PropTypes.object.isRequired
+        params: React.PropTypes.object.isRequired,
+        item: React.PropTypes.object.isRequired
     },
 
     goBack: function () {
@@ -17,14 +19,9 @@ var ViewItem = React.createClass({
 
     render: function () {
         return (
-            <div>
-                <div>Id: {this.props.item.id}</div>
-                <div>Name: {this.props.item.name}</div>
-                <div>Price: {this.props.item.price}</div>
-                <div>Quantity: {this.props.item.quantity}</div>
-
+            <ItemComponent item={this.props.item}>
                 <button onClick={this.goBack}>Go Back</button>
-            </div>
+            </ItemComponent>
         );
     }
 });
