@@ -1,6 +1,6 @@
-var React = require("react");
+import React from "react"
 
-var ItemComponent = function (props) {
+const ItemComponent = (props) => {
     return (
         <div className="item-component">
             <div className="name">{props.item.name}</div>
@@ -11,4 +11,4 @@ var ItemComponent = function (props) {
     );
 };
 
-module.exports = ItemComponent;
+export default ItemComponent;

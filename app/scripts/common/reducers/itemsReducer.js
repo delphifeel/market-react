@@ -1,9 +1,7 @@
-var itemsActionsTypes = require("common/constants/itemsActionsTypes");
-var _ = require("underscore");
+import itemsActionsTypes from "common/constants/itemsActionsTypes"
+import _ from "underscore"
 
-var initialState = [];
-
-function addToItems(items, item) {
+const addToItems = (items, item) => {
     var newItems, newItem, id;
 
     newItems = items.slice();
@@ -13,9 +11,9 @@ function addToItems(items, item) {
     }));
 
     return newItems;
-}
+};
 
-function changeItemQuantity(items, itemId, newQuantity) {
+const changeItemQuantity = (items, itemId, newQuantity) => {
     var newItems, item, newItemIndex, newItem;
 
     newItems = items.slice();
@@ -25,13 +23,9 @@ function changeItemQuantity(items, itemId, newQuantity) {
     newItems[newItemIndex] = newItem;
 
     return newItems;
-}
+};
 
-function itemsReducer(items, action) {
-    if (items === undefined) {
-        items = [];
-    }
-
+const itemsReducer = (items = [], action = null) => {
     switch (action.type) {
         case itemsActionsTypes.ADD_ITEM:
             return addToItems(items, action.item);
@@ -45,6 +39,6 @@ function itemsReducer(items, action) {
         default:
             return items;
     }
-}
+};
 
-module.exports = itemsReducer;
+export default itemsReducer;

@@ -1,16 +1,16 @@
-var React = require("react");
-var Header = require("./header");
-var Body = require("./body");
-var connect = require("react-redux").connect;
-var itemsActions = require("common/actions/itemsActions");
+import React from "react"
+import Header from "./header"
+import Body from "./body"
+import {connect} from "react-redux"
+import itemsActions from "common/actions/itemsActions"
 
-var Application = React.createClass({
-
-    componentWillMount: function () {
+class Application extends React.Component {
+    constructor(props) {
+        super(props);
         this.props.loadItems();
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <div>
                 <Header />
@@ -18,16 +18,12 @@ var Application = React.createClass({
             </div>
         );
     }
-});
+}
 
-var loadItems = function (dispatch) {
-    dispatch(itemsActions.loadItems());
-};
-
-var mapDispatchToProps = function (dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
-        loadItems: loadItems.bind(null, dispatch)
+        loadItems: () => dispatch(itemsActions.loadItems())
     };
 };
 
-module.exports = connect(null, mapDispatchToProps)(Application);
+export default connect(null, mapDispatchToProps)(Application);

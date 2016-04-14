@@ -1,17 +1,14 @@
-var Application = require("./scripts/common/containers/app");
-var Body = require("./scripts/common/containers/body");
-var ViewItem = require("./scripts/common/containers/viewItem");
-var Provider = require("react-redux").Provider;
-var ReactDom = require("react-dom");
-var React = require("react");
-var mainStore = require("common/stores/mainStore");
-var syncHistoryWithStore = require("react-router-redux").syncHistoryWithStore;
-var Router = require("react-router").Router;
-var Route = require("react-router").Route;
-var IndexRoute = require("react-router").IndexRoute;
-var browserHistory = require("react-router").browserHistory;
+import Application from "./scripts/common/containers/app"
+import Body from "./scripts/common/containers/body"
+import ViewItem from "./scripts/common/containers/viewItem"
+import {Provider} from "react-redux"
+import ReactDom from "react-dom"
+import React from "react"
+import mainStore from "common/stores/mainStore"
+import {syncHistoryWithStore} from "react-router-redux"
+import {Router, Route, IndexRoute, browserHistory} from "react-router"
 
-require("./styles/main.less");
+import * as styles from "./styles/main.less"
 
 const history = syncHistoryWithStore(browserHistory, mainStore);
 

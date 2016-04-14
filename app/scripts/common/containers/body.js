@@ -1,18 +1,18 @@
-var React = require("react");
-var ItemsPanel = require("./itemsPanel");
-var CreateItemForm = require("./createItemForm");
-var HideChildren = require("./hideChildren");
-var activeFormActions = require("common/actions/activeFormActions");
-var activeFormActionsTypes = require("common/constants/activeFormActionsTypes");
-var itemsActions = require("common/actions/itemsActions");
-var connect = require("react-redux").connect;
+import React from "react"
+import ItemsPanel from "./itemsPanel"
+import CreateItemForm from "./createItemForm"
+import HideChildren from "./hideChildren"
+import activeFormActions from "common/actions/activeFormActions"
+import activeFormActionsTypes from "common/constants/activeFormActionsTypes"
+import itemsActions from "common/actions/itemsActions"
+import {connect} from "react-redux"
 
-var Body = React.createClass({
-    render: function () {
+class Body extends React.Component {
+    render() {
         return (
             <div>
                 {this.props.isFormOpened ?
-                    <CreateItemForm onCreate={this.props.onCreate} onBack={this.props.onBack} /> :
+                    <CreateItemForm onCreate={this.props.onCreate} onBack={this.props.onBack}/> :
                     null
                 }
 
@@ -22,24 +22,24 @@ var Body = React.createClass({
             </div>
         );
     }
-});
+}
 
-var mapStateToProps = function (state) {
+const mapStateToProps = (state) => {
     return {
         isFormOpened: state.activeForm === activeFormActionsTypes.CREATE_ITEM_FORM_NAME
     }
 };
 
-var onItemCreate = function (dispatch, item) {
+const onItemCreate = (dispatch, item) => {
     dispatch(activeFormActions.closeActiveForm());
     dispatch(itemsActions.addItem(item));
 };
 
-var mapDispatchToProps = function (dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
         onCreate: onItemCreate.bind(null, dispatch),
         onBack: dispatch.bind(null, activeFormActions.closeActiveForm())
     }
 };
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(Body);
+export default connect(mapStateToProps, mapDispatchToProps)(Body);

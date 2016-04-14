@@ -1,19 +1,21 @@
 /**
  * Created by Zeron on 05.04.2016.
  */
-var React = require("react");
+import React from "react"
 
-var CreateItemForm = React.createClass({
-    getInitialState: function () {
-        return {
+class CreateItemForm extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
             nameValid: true,
             priceValid: true,
             quantityValid: true
         };
-    },
+    }
 
-    onSubmit: function (e) {
-        var name, price, quantity, nameValid, priceValid, quantityValid;
+    onSubmit(e) {
+        let name, price, quantity, nameValid, priceValid, quantityValid;
 
         e.preventDefault();
 
@@ -27,53 +29,52 @@ var CreateItemForm = React.createClass({
 
         if (!nameValid || !priceValid) {
             this.setState({
-                nameValid: nameValid,
-                priceValid: priceValid,
-                quantityValid: quantityValid
+                nameValid, priceValid, quantityValid
             });
         } else {
             this.props.onCreate({
-                name: name,
-                price: price,
-                quantity: quantity
+                name, price, quantity
             });
         }
-    },
+    }
 
-    setStateValid: function (stateProperty) {
+    setStateValid(stateProperty) {
         if (!this.state[stateProperty]) {
-            var valid = {};
-            valid[stateProperty] = true;
-            this.setState(valid);
+            this.setState({
+                [stateProperty]: true
+            });
         }
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <div className="create-item-form">
                 <div>
                     <label htmlFor="name">Name</label>
-                    <input id="name" ref="name" onChange={this.setStateValid.bind(null, "nameValid")} type="text" placeholder="Name"/>
+                    <input id="name" ref="name" onChange={() => this.setStateValid("nameValid")} type="text"
+                           placeholder="Name"/>
                     {this.state.nameValid ? null : <span className="error-message">Name required.</span>}
                 </div>
 
                 <div>
                     <label htmlFor="price">Price</label>
-                    <input id="price" ref="price" onChange={this.setStateValid.bind(null, "priceValid")} type="number" placeholder="0"/>
+                    <input id="price" ref="price" onChange={() => this.setStateValid("priceValid")} type="number"
+                           placeholder="0"/>
                     {this.state.priceValid ? null : <span className="error-message">Price required.</span>}
                 </div>
 
                 <div>
                     <label htmlFor="quantity">Quantity</label>
-                    <input id="quantity" ref="quantity" onChange={this.setStateValid.bind(null, "quantityValid")} type="number" placeholder="0"/>
+                    <input id="quantity" ref="quantity" onChange={() => this.setStateValid("quantityValid")}
+                           type="number" placeholder="0"/>
                     {this.state.quantityValid ? null : <span className="error-message">Quantity required.</span>}
                 </div>
 
-                <button onClick={this.onSubmit}>Add</button>
+                <button onClick={(e) => this.onSubmit(e)}>Add</button>
                 <button onClick={this.props.onBack}>Back</button>
             </div>
         );
     }
-});
+}
 
-module.exports = CreateItemForm;
+export default CreateItemForm;

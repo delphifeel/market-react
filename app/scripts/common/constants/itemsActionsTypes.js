@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     ADD_ITEM: "ITEMS_ADD_ITEM",
     CHANGE_ITEM_QUANTITY: "ITEMS_CHANGE_ITEM_QUANTITY",
     LOAD_ITEMS: "ITEMS_LOAD_ITEMS"

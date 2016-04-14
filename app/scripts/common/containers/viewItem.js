@@ -1,39 +1,25 @@
-/**
- * Created by Zeron on 09.04.2016.
- */
-var React = require("react");
-var connect = require("react-redux").connect;
-var _ = require("underscore");
-var ItemComponent = require("common/components/itemComponent");
-var browserHistory = require("react-router").browserHistory;
+import React from "react"
+import {connect} from "react-redux"
+import _ from "underscore"
+import {browserHistory} from "react-router"
+import ItemComponent from "common/components/itemComponent"
 
-var ViewItem = React.createClass({
-    propTypes: {
-        params: React.PropTypes.object.isRequired,
-        item: React.PropTypes.object.isRequired
-    },
+const ViewItem = (props) => {
+    return (
+        <ItemComponent item={props.item}>
+            <button onClick={() => browserHistory.goBack()}>Go Back</button>
+        </ItemComponent>
+    );
+};
 
-    goBack: function () {
-        browserHistory.goBack();
-    },
-
-    render: function () {
-        return (
-            <ItemComponent item={this.props.item}>
-                <button onClick={this.goBack}>Go Back</button>
-            </ItemComponent>
-        );
-    }
-});
-
-var getItem = function (items, itemId) {
+const getItem = (items, itemId) => {
     return _.findWhere(items, {id: parseInt(itemId)}) || {};
 };
 
-var mapStateToProps = function (state, ownProps) {
+const mapStateToProps = (state, ownProps) => {
     return {
         item: getItem(state.items, ownProps.params.itemId)
     }
 };
 
-module.exports = connect(mapStateToProps)(ViewItem);
+export default connect(mapStateToProps)(ViewItem);

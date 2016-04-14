@@ -1,29 +1,24 @@
-var React = require("react");
-var connect = require("react-redux").connect;
-var itemsActions = require("common/actions/itemsActions");
-var bucketActions = require("common/actions/bucketActions");
-var ItemOnPanel = require("common/containers/itemOnPanel");
-var createSelector = require("reselect").createSelector;
-var activeFormActions = require("common/actions/activeFormActions");
-var activeFormActionsTypes = require("common/constants/activeFormActionsTypes");
+import React from "react"
+import {connect} from "react-redux"
+import itemsActions from "common/actions/itemsActions"
+import bucketActions from "common/actions/bucketActions"
+import ItemOnPanel from "common/containers/itemOnPanel"
+import {createSelector} from "reselect"
+import activeFormActions from "common/actions/activeFormActions"
+import activeFormActionsTypes from "common/constants/activeFormActionsTypes"
 
-var ItemsPanel = React.createClass({
-    propTypes: {
-        items: React.PropTypes.array.isRequired,
-        openCreateItemForm: React.PropTypes.func.isRequired
-    },
-
-    createItemComponent: function (item) {
+class ItemsPanel extends React.Component {
+    createItemComponent(item) {
         return (
             <ItemOnPanel key={item.id} item={item}/>
         );
-    },
+    }
 
-    getItems: function () {
+    getItems() {
         return this.props.items.map(this.createItemComponent);
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <div>
                 <button onClick={this.props.openCreateItemForm}>Create new item</button>
@@ -33,28 +28,27 @@ var ItemsPanel = React.createClass({
             </div>
         );
     }
-});
+}
 
-var getItems = function (state) {
-    return state.items;
+ItemsPanel.propTypes = {
+    items: React.PropTypes.array.isRequired,
+    openCreateItemForm: React.PropTypes.func.isRequired
 };
 
-var getExistingItems = createSelector(
+const getItems = (state) => state.items;
+
+const getExistingItems = createSelector(
     [getItems],
-    function (items) {
-        return items.filter(function (item) {
-            return item.quantity > 0;
-        });
-    }
+    (items) => items.filter((item) => item.quantity > 0)
 );
 
-var mapStateToProps = function (state) {
+const mapStateToProps = (state) => {
     return {
         items: getExistingItems(state)
     }
 };
 
-var mapDispatchToProps = function (dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
         openCreateItemForm: dispatch.bind(
             null,
@@ -63,6 +57,4 @@ var mapDispatchToProps = function (dispatch) {
     }
 };
 
-ItemsPanel = connect(mapStateToProps, mapDispatchToProps)(ItemsPanel);
-
-module.exports = ItemsPanel;
+export default connect(mapStateToProps, mapDispatchToProps)(ItemsPanel);

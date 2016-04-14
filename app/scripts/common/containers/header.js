@@ -1,14 +1,12 @@
-var React = require("react");
-var Bucket = require("./bucket");
+import React from "react"
+import Bucket from "./bucket"
 
-var Header = React.createClass({
-    render: function () {
-        return (
-            <div className="header-panel">
-                <Bucket />
-            </div>
-        );
-    }
-});
+const Header = () => {
+    return (
+        <div className="header-panel">
+            <Bucket />
+        </div>
+    );
+};
 
-module.exports = Header;
+export default Header;

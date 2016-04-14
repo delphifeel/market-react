@@ -1,10 +1,10 @@
-var bucketActionsTypes = require("common/constants/bucketActionsTypes");
+import bucketActionsTypes from "common/constants/bucketActionsTypes"
 
-module.exports = {
-    addItem: function (item) {
+export default {
+    addItem(item) {
         return {
             type: bucketActionsTypes.ADD_ITEM,
-            item: item
+            item
         }
     }
 };

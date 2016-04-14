@@ -1,32 +1,24 @@
 /**
  * Created by Zeron on 12.04.2016.
  */
-var React = require("react");
-var ItemComponent = require("common/components/itemComponent");
-var connect = require("react-redux").connect;
-var itemsActions = require("common/actions/itemsActions");
-var bucketActions = require("common/actions/bucketActions");
-var browserHistory = require("react-router").browserHistory;
-var _ = require("underscore");
+import React from "react"
+import ItemComponent from "common/components/itemComponent"
+import {connect} from "react-redux"
+import itemsActions from "common/actions/itemsActions"
+import bucketActions from "common/actions/bucketActions"
+import {browserHistory} from "react-router"
+import _ from "underscore"
 
-var ItemOnPanel = React.createClass({
-    propTypes: {
-        item: React.PropTypes.object.isRequired,
-        onAddToBucket: React.PropTypes.func.isRequired,
-        onView: React.PropTypes.func.isRequired
-    },
+const ItemOnPanel = (props) => {
+    return (
+        <ItemComponent item={props.item}>
+            <button onClick={props.onAddToBucket}>Add to bucket</button>
+            <button onClick={props.onView}>View</button>
+        </ItemComponent>
+    );
+};
 
-    render: function () {
-        return (
-            <ItemComponent item={this.props.item}>
-                <button onClick={this.props.onAddToBucket}>Add to bucket</button>
-                <button onClick={this.props.onView}>View</button>
-            </ItemComponent>
-        );
-    }
-});
-
-var addToBucket = function (dispatch, item) {
+const addToBucket = (dispatch, item) => {
     if (item.quantity > 0) {
 
         dispatch(bucketActions.addItem(
@@ -40,15 +32,11 @@ var addToBucket = function (dispatch, item) {
     }
 };
 
-var viewItem = function (itemId) {
-    browserHistory.push("/item/" + itemId + "/view");
-};
-
-var mapDispatchToProps = function (dispatch, ownProps) {
+const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        onView: viewItem.bind(null, ownProps.item.id),
+        onView: () => browserHistory.push("/item/" + ownProps.item.id + "/view"),
         onAddToBucket: addToBucket.bind(null, dispatch, ownProps.item)
     }
 };
 
-module.exports = connect(null, mapDispatchToProps)(ItemOnPanel);
+export default connect(null, mapDispatchToProps)(ItemOnPanel);

@@ -1,11 +1,10 @@
-var bucketActionsTypes = require("common/constants/bucketActionsTypes");
-var _ = require("underscore");
+import bucketActionsTypes from "common/constants/bucketActionsTypes"
+import _ from "underscore"
 
-function addToBucket (bucketItems, item) {
-    var bucketItem, alreadyItem, newBucketItems,
-        me = this;
+const addToBucket = (bucketItems, item) => {
+    let bucketItem, alreadyItem, newBucketItems;
 
-    newBucketItems = bucketItems.slice();
+    newBucketItems = [...bucketItems];
     bucketItem = _.pick(item, "id", "name", "price");
     alreadyItem = _.findWhere(newBucketItems, {id: bucketItem.id});
     if (alreadyItem) {
@@ -16,20 +15,15 @@ function addToBucket (bucketItems, item) {
     }
 
     return newBucketItems;
-}
+};
 
-function bucketReducer(bucketItems, action) {
-    if (bucketItems === undefined) {
-        bucketItems = [];
-    }
-
+const bucketReducer = (bucketItems = [], action = null) => {
     switch (action.type) {
         case bucketActionsTypes.ADD_ITEM:
             return addToBucket(bucketItems, action.item);
-
         default:
             return bucketItems;
     }
-}
+};
 
-module.exports = bucketReducer;
+export default bucketReducer;

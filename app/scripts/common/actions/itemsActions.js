@@ -1,34 +1,33 @@
-var itemsActionsTypes = require("common/constants/itemsActionsTypes");
-var $ = require("jquery");
-var itemsService = require("common/services/itemsService");
+import itemsActionsTypes from "common/constants/itemsActionsTypes"
+import $ from "jquery"
+import itemsService from "common/services/itemsService"
 
-module.exports = {
-    addItem: function (item) {
+export default {
+    addItem (item) {
         return {
             type: itemsActionsTypes.ADD_ITEM,
-            item: item
+            item
         }
     },
 
-    changeItemQuantity: function (itemId, newQuantity) {
+    changeItemQuantity (itemId, newQuantity) {
         return {
             type: itemsActionsTypes.CHANGE_ITEM_QUANTITY,
-            itemId: itemId,
-            newQuantity: newQuantity
+            itemId,
+            newQuantity
         }
     },
 
-    afterLoadItems: function (items) {
+    afterLoadItems (items) {
         return {
             type: itemsActionsTypes.LOAD_ITEMS,
-            items: items
+            items
         };
     },
 
-    loadItems: function () {
+    loadItems () {
         var me = this;
-
-        return function (dispatch) {
+        return (dispatch) => {
             return itemsService.getItems()
                 .then(function (items) {
                     return dispatch(me.afterLoadItems(items));

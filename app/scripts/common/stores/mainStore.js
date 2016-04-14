@@ -1,33 +1,30 @@
 /**
  * Created by Zeron on 01.04.2016.
  */
-var bucketReducer = require("common/reducers/bucketReducer");
-var itemsReducer = require("common/reducers/itemsReducer");
-var activeFormReducer = require("common/reducers/activeFormReducer");
-var combineReducers = require("redux").combineReducers;
-var applyMiddleware = require("redux").applyMiddleware;
-var reduxThunk = require("redux-thunk");
-var createStore = require("redux").createStore;
-var routerReducer = require("react-router-redux").routerReducer;
+import bucketReducer from "common/reducers/bucketReducer"
+import itemsReducer from "common/reducers/itemsReducer"
+import activeFormReducer from "common/reducers/activeFormReducer"
+import {combineReducers, applyMiddleware, createStore} from "redux"
+import reduxThunk from "redux-thunk"
 
-var initialState = {
+import {routerReducer} from "react-router-redux"
+
+const initialState = {
     items: [],
     bucket: []
 };
 
-var mainReducer = combineReducers({
+const mainReducer = combineReducers({
     bucket: bucketReducer,
     items: itemsReducer,
     activeForm: activeFormReducer,
     routing: routerReducer
 });
 
-var mainStore = createStore(
+export default createStore(
     mainReducer,
     initialState,
     applyMiddleware(
-        reduxThunk.default
+        reduxThunk
     )
 );
-
-module.exports = mainStore;

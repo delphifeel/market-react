@@ -1,22 +1,13 @@
-/**
- * Created by Zeron on 06.04.2016.
- */
-var React = require("react");
+import React from "react"
 
-var HideChildren = React.createClass({
-    propTypes: {
-        condition: React.PropTypes.bool.isRequired
-    },
+const HideChildren = (props) => {
+    const hideStyle = props.condition ? {display: "none"} : {};
 
-    render: function () {
-        var hideStyle = this.props.condition ? {display: "none"} : {};
+    return (
+        <div style={hideStyle}>
+            {props.children}
+        </div>
+    )
+};
 
-        return (
-            <div style={hideStyle}>
-                {this.props.children}
-            </div>
-        )
-    }
-});
-
-module.exports = HideChildren;
+export default HideChildren;
