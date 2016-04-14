@@ -31,7 +31,7 @@ class Bucket extends React.Component{
             return;
         }
         return <div className="summary">Summary: {getSummary(this.props.items)}</div>
-    },
+    }
 
     render () {
         return (
