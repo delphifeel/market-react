@@ -1,17 +1,22 @@
+.cursive-font() {
+  font-family: cursive;
+  color: darkcyan;
+}
+
 .black-border() {
-  border: 2px solid black;
+  border: 2px solid silver;
 }
 
 .item-component {
   .black-border;
   float: left;
+  min-width: 150px;
   padding: 10px;
   margin: 10px;
   border-radius: 5px;
 
   .name {
-    font-family: cursive;
-    color: darkcyan;
+    .cursive-font;
   }
 }
 
@@ -20,11 +25,20 @@
   overflow: auto;
   height: 15%;
   margin-bottom: 20px;
+
+  .bucket {
+    padding: 10px;
+
+    .summary {
+      .cursive-font;
+    }
+  }
 }
 
 .body-panel {
   .black-border;
   height: 80%;
+  overflow: auto;
 }
 
 .header-picture {
