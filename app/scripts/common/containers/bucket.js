@@ -33,12 +33,12 @@ var Bucket = React.createClass({
         if (this.props.items.length <= 0) {
             return;
         }
-        return <div>Summary: {getSummary(this.props.items)}</div>
+        return <div className="summary">Summary: {getSummary(this.props.items)}</div>
     },
 
     render: function () {
         return (
-            <div>
+            <div className="bucket">
                 {this.getBucketItems()}
                 {this.getSummaryPrice()}
             </div>
