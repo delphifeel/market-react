@@ -14,7 +14,7 @@ class Bucket extends React.Component{
 
     createBucketItem (item) {
         return (
-            <div key={item.id}>{item.count} {item.name}</div>
+            <p key={item.id}>{item.count}<span className="title"> {item.name}</span><span className="value">{item.price}$</span></p>
         );
     }
 
@@ -30,7 +30,7 @@ class Bucket extends React.Component{
         if (this.props.items.length <= 0) {
             return;
         }
-        return <div className="summary">Summary: {getSummary(this.props.items)}</div>
+        return <div className="summary">Summary: {getSummary(this.props.items)}$</div>
     }
 
     render () {

@@ -3,12 +3,14 @@ import React from "react"
 const ItemComponent = (props) => {
     return (
         <div className="item-component">
-            <div className="name">{props.item.name}</div>
+            <h1 className="name" onClick={props.onHeaderClick}>{props.item.name}</h1>
             <div>
                 <p>Count: {props.item.quantity}</p>
-                <p>Price: {props.item.price}</p>
+                <p>Price: {props.item.price}$</p>
             </div>
-            {props.children}
+            <div className="btn-container">
+                {props.children}
+            </div>
         </div>
     );
 };
