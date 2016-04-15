@@ -5,10 +5,9 @@ const addToItems = (items, item) => {
     var newItems, newItem, id;
 
     newItems = items.slice();
-    id = _.last(newItems).id + 1;
-    newItems.push(_.extend(item, {
-        id: id
-    }));
+    item.id = _.last(newItems).id + 1;
+    item.price = Math.round(item.price * 100) / 100;
+    newItems.push(item);
 
     return newItems;
 };

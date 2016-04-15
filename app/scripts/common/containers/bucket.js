@@ -7,6 +7,7 @@ const getSummary = (items) => {
     _.each(items, (item) => {
         result += item.count * item.price;
     });
+    result = Math.round(result * 100) / 100;
     return result;
 };
 
