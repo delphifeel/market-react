@@ -7,6 +7,7 @@ const addToItems = (items, item) => {
     newItems = items.slice();
     item.id = _.last(newItems).id + 1;
     item.price = Math.round(item.price * 100) / 100;
+    item.quantity = Math.round(item.quantity);
     newItems.push(item);
 
     return newItems;
