@@ -21,8 +21,9 @@ class ItemsPanel extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={this.props.openCreateItemForm}>Create new item</button>
+                <button className="create-btn" onClick={this.props.openCreateItemForm}><i className="glyph icon-plus"></i> Create new item</button>
                 <div className="body-panel">
+                    <h1>Available products</h1>
                     {this.getItems()}
                 </div>
             </div>

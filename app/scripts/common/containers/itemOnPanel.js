@@ -12,8 +12,8 @@ import _ from "underscore"
 const ItemOnPanel = (props) => {
     return (
         <ItemComponent item={props.item}>
-            <button onClick={props.onAddToBucket}>Add to bucket</button>
-            <button onClick={props.onView}>View</button>
+            <button className="btn btn-primary" onClick={props.onAddToBucket}>Add to bucket</button>
+            <button className="btn btn-primary" onClick={props.onView}>View</button>
         </ItemComponent>
     );
 };

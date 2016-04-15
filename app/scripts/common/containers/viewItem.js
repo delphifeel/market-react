@@ -7,7 +7,7 @@ import ItemComponent from "common/components/itemComponent"
 const ViewItem = (props) => {
     return (
         <ItemComponent item={props.item}>
-            <button onClick={() => browserHistory.goBack()}>Go Back</button>
+            <button className="btn btn-primary" onClick={() => browserHistory.goBack()}>Go Back</button>
         </ItemComponent>
     );
 };

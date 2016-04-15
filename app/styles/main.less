@@ -1,18 +1,38 @@
+* {
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  line-height: 1;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 .cursive-font() {
   font-family: cursive;
   color: darkcyan;
 }
 
-.black-border() {
-  border: 2px solid silver;
+.border() {
+  border: 2px solid #c0c0c0;
+}
+
+.clearfix() {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
 }
 
 .item-component {
-  .black-border;
+  .border;
   float: left;
   min-width: 150px;
   padding: 10px;
-  margin: 10px;
   border-radius: 5px;
 
   .name {
@@ -21,7 +41,7 @@
 }
 
 .header-panel {
-  .black-border;
+  .border;
   overflow: auto;
   height: 15%;
   margin-bottom: 20px;
@@ -33,12 +53,6 @@
       .cursive-font;
     }
   }
-}
-
-.body-panel {
-  .black-border;
-  height: 80%;
-  overflow: auto;
 }
 
 .header-picture {
@@ -61,4 +75,101 @@
 
 .error-message {
   color: red;
+}
+
+.btn {
+  display: inline-block;
+  margin: 5px 5px 0 0;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 5px 10px;
+  border-radius: 3px;
+
+  &.btn-primary {
+    background-color: #0ea0eb;
+    color: #f8f8f8;
+    border: 1px solid #0e85ce;
+
+    &:hover, &:active, &:focus {
+      background-color: #0e85ce;
+    }
+  }
+}
+
+.create-btn {
+  .btn;
+  .border;
+  margin: 0 0 -2px 0;
+  border-radius: 3px 3px 0 0;
+  border-bottom: none;
+  background-color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 400;
+  position: relative;
+
+  &:focus, &:hover, &:active {
+    background-color: #c0c0c0;
+  }
+
+  &:focus {
+    outline:0;
+  }
+}
+
+#root {
+  padding: 10px;
+
+  .header-panel{
+    min-height: 100px;
+  }
+}
+
+.body-panel {
+  .border;
+  .clearfix;
+
+  h1 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 400;
+    padding: 10px;
+  }
+
+  .item-component {
+    margin: 10px;
+  }
+}
+
+.item-component {
+  text-align: center;
+  margin-right: 10px;
+
+  & > div {
+    padding: 5px;
+  }
+
+  p {
+    display: inline-block;
+
+    &:before, &:after {
+      content: "";
+      padding: 0 5px;
+    }
+
+    &:before {
+      content: "";
+      border-left: 1px solid #c0c0c0;
+    }
+
+    &:first-child {
+      &:before {
+        display: none;
+      }
+    }
+  }
 }

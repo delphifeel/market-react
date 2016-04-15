@@ -70,8 +70,8 @@ class CreateItemForm extends React.Component {
                     {this.state.quantityValid ? null : <span className="error-message">Quantity required.</span>}
                 </div>
 
-                <button onClick={(e) => this.onSubmit(e)}>Add</button>
-                <button onClick={this.props.onBack}>Back</button>
+                <button className="btn btn-primary" onClick={(e) => this.onSubmit(e)}>Add</button>
+                <button className="btn btn-primary" onClick={this.props.onBack}>Back</button>
             </div>
         );
     }
