@@ -7,22 +7,20 @@ import activeFormActionsTypes from "common/constants/activeFormActionsTypes"
 import itemsActions from "common/actions/itemsActions"
 import {connect} from "react-redux"
 
-class Body extends React.Component {
-    render() {
-        return (
-            <div>
-                {this.props.isFormOpened ?
-                    <CreateItemForm onCreate={this.props.onCreate} onBack={this.props.onBack}/> :
-                    null
-                }
+const Body = (props) => {
+    return (
+        <div>
+            {props.isFormOpened ?
+                <CreateItemForm onCreate={props.onCreate} onBack={props.onBack}/> :
+                null
+            }
 
-                <HideChildren condition={this.props.isFormOpened}>
-                    <ItemsPanel />
-                </HideChildren>
-            </div>
-        );
-    }
-}
+            <HideChildren condition={props.isFormOpened}>
+                <ItemsPanel />
+            </HideChildren>
+        </div>
+    );
+};
 
 const mapStateToProps = (state) => {
     return {

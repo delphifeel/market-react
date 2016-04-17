@@ -7,33 +7,16 @@ import {createSelector} from "reselect"
 import activeFormActions from "common/actions/activeFormActions"
 import activeFormActionsTypes from "common/constants/activeFormActionsTypes"
 
-class ItemsPanel extends React.Component {
-    createItemComponent(item) {
-        return (
-            <ItemOnPanel key={item.id} item={item}/>
-        );
-    }
-
-    getItems() {
-        return this.props.items.map(this.createItemComponent);
-    }
-
-    render() {
+const ItemsPanel = (props) => {
         return (
             <div>
-                <button className="btn btn-primary create-btn" onClick={this.props.openCreateItemForm}>Create new item</button>
+                <button className="btn btn-primary create-btn" onClick={props.openCreateItemForm}>Create new item</button>
                 <div className="body-panel">
                     <h1>Available products</h1>
-                    {this.getItems()}
+                    {props.items.map((item) => <ItemOnPanel key={item.id} item ={item}/>)}
                 </div>
             </div>
         );
-    }
-}
-
-ItemsPanel.propTypes = {
-    items: React.PropTypes.array.isRequired,
-    openCreateItemForm: React.PropTypes.func.isRequired
 };
 
 const getItems = (state) => state.items;
